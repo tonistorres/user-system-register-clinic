@@ -13,4 +13,21 @@ export default class UserSystemService {
         return await this._userRepoMYSQL.getAll();
     }
 
+    async create(
+        cpf: string,
+        usuario: string,
+        celular: string,
+        login: string,
+        senha: string,
+        perfil: string,
+        sexo: string,
+        email: string,
+        estado: string,        
+        ): Promise<UserSystem> {
+        const user = new UserSystem(usuario,sexo,cpf,celular,login,senha,perfil,email,estado);
+        const userCreated = await this._userRepoMYSQL.create(user);
+        return userCreated;
+    }
+
+
 }

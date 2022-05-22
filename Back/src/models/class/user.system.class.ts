@@ -1,7 +1,7 @@
 import Person from "../../abstracts/person.abstract";
 
 export default class UserSystem extends Person {
-
+    // private _id?: number | undefined;
     private _cpf: string = '';
     private _celular_principal: string = '';
     private _login: string = '';
@@ -23,9 +23,10 @@ constructor(
     perfil: string,
     email: string,
     estado: string,
-       
+    // id?:number | undefined,       
     ){
-    super(usuario, sexo )
+    super(usuario, sexo)
+        // this._id = id;
         this.cpf = cpf;
         this.celular = celular;
         this.login = login;
@@ -41,8 +42,12 @@ get cpf(): string {
     return this._cpf;
 }
 
+get cadastro():Date{
+    return this._cadastro;
+}
+
 public set cpf(cpf: string) {
-    if (cpf.length > 15 ) throw Error('CPF inválido! CPF deve possuir até 15 caracter(es))');
+    // if (cpf.length > 15 ) throw Error('CPF inválido! CPF deve possuir até 15 caracter(es))');
     if(!cpf) throw Error ('CPF é Obrigatorio ');
     this._cpf = cpf;
 }

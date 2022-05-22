@@ -15,8 +15,15 @@ export default class UserSystemMysqlRepo implements IGenericMethods<UserSystem> 
         return users as Array<UserSystem>;
     }
 
-    create(tipo: UserSystem): Promise<UserSystem> {
-        throw new Error('Method not implemented.');
+    async create(user: UserSystem): Promise<UserSystem> {
+       const {cpf, usuario, celular, login, senha, perfil, sexo, email, estado} = user;
+       const result = await this._connection.execute<ResultSetHeader>(
+           'INSERT INTO tbusuarios (CPF, usuario, celular_principal, login, senha, perfil, sexo, email_principal, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+           [cpf, usuario, celular, login, senha, perfil, sexo, email, estado],
+         );
+        //   const [dataInserted] = result;
+        //   const { insertId } = dataInserted;
+          return user;
     }
 
     update(product: UserSystem): Promise<UserSystem> {

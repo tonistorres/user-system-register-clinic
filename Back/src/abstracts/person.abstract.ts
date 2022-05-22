@@ -7,6 +7,7 @@ export default abstract class Person {
     
 
     constructor(usuario: string, sexo: string) {
+
         this.usuario = usuario;
         this.sexo = sexo;
     }
