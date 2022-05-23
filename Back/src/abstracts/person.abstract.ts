@@ -1,13 +1,10 @@
 
-export default abstract class Person {
+export default class Person {
 
-    private _usuario: string = '';
-    private _sexo: string = '';
+    protected _usuario: string = '';
+    protected _sexo: string = '';
     
-    
-
     constructor(usuario: string, sexo: string) {
-
         this.usuario = usuario;
         this.sexo = sexo;
     }
@@ -16,6 +13,7 @@ export default abstract class Person {
         return this._usuario;
     }
 
+   
     public set usuario(usuario: string) {
         if (usuario.length < 2) throw Error('Dados inválidos usuario deve ter pelo menos 2 caracter(s)');
         if(!usuario) throw Error ('Usuario Obrigatorio ');
@@ -34,6 +32,6 @@ export default abstract class Person {
         this._sexo = sexo.toUpperCase().trim();
     }
 
-    public abstract toString(): string;
+    
 
 }

@@ -1,6 +1,13 @@
 import UserSystem from "../models/class/user.system.class";
 import UserRepoMYSQL from "../models/repositories/user.repository.mysql";
 
+export type Test ={
+    data:UserSystem,
+    status:number,
+    msg: string
+}
+
+
 export default class UserSystemService {
 
     private _userRepoMYSQL: UserRepoMYSQL;
@@ -10,7 +17,16 @@ export default class UserSystemService {
     }
 
     async getAll(): Promise<Array<UserSystem>> {
-        return await this._userRepoMYSQL.getAll();
+        return this._userRepoMYSQL.getAll();
+    }
+
+    async getById(id:number):Promise<Test>{
+
+        const data = await this._userRepoMYSQL.getById(+id);
+        if(!data){
+         return {status: 200, msg:'hello'} as Test    
+        }
+        return {data} as Test;
     }
 
     async create(

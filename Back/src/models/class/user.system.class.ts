@@ -1,7 +1,8 @@
 import Person from "../../abstracts/person.abstract";
 
 export default class UserSystem extends Person {
-    // private _id?: number | undefined;
+    
+    private _id: number=0;
     private _cpf: string = '';
     private _celular_principal: string = '';
     private _login: string = '';
@@ -23,10 +24,11 @@ constructor(
     perfil: string,
     email: string,
     estado: string,
-    // id?:number | undefined,       
+    id?:number,       
     ){
     super(usuario, sexo)
-        // this._id = id;
+    
+       if(id) this._id = id;
         this.cpf = cpf;
         this.celular = celular;
         this.login = login;
@@ -37,6 +39,13 @@ constructor(
         this._cadastro = new Date();
 }
 
+get id():number{
+    return this._id;
+}
+
+set id(id:number){
+this._id = id;
+}
 
 get cpf(): string {
     return this._cpf;
@@ -115,6 +124,7 @@ public set estado(estado: string) {
     if(!estado) throw Error ('estado é Obrigatorio ');
     this._estado = estado.toUpperCase().trim();
 }
+
 
 public toString(): string {
  return `

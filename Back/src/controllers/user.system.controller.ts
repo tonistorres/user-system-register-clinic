@@ -30,5 +30,16 @@ export default class UserSystemController {
   }
 
   
+  public getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const {id} = req.params;
+      const {status, msg, data} = await userService.getById(+id)
+      if (!data) res.status(status).json ({message:msg});
+      res.status(StatusCode.status200).json({data});
+    } catch (error) {
+      next(error);
+    }
+  };
+
 
 }

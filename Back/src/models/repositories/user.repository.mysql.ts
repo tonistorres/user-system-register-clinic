@@ -21,8 +21,9 @@ export default class UserSystemMysqlRepo implements IGenericMethods<UserSystem> 
            'INSERT INTO tbusuarios (CPF, usuario, celular_principal, login, senha, perfil, sexo, email_principal, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
            [cpf, usuario, celular, login, senha, perfil, sexo, email, estado],
          );
-        //   const [dataInserted] = result;
-        //   const { insertId } = dataInserted;
+          const [dataInserted] = result;
+          const { insertId } = dataInserted;
+          user.id=insertId;
           return user;
     }
 
@@ -30,8 +31,10 @@ export default class UserSystemMysqlRepo implements IGenericMethods<UserSystem> 
         throw new Error('Method not implemented.');
     }
     
-    getById(id: string): Promise<UserSystem> {
-        throw new Error('Method not implemented.');
+   async getById(id:number): Promise<UserSystem> {
+    const [dataList] = await this._connection.execute('SELECT * FROM tbusuarios WHERE iduser = ?',[id]);
+    const [user] = dataList as UserSystem[];
+    return user;
     }
 
 
